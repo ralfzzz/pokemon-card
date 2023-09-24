@@ -11,13 +11,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 const cards = await tcgdex.fetch("cards");
 
 app.use('/', (req,res) => {
-    // console.log(cards);
+    console.log(cards);
     res.render('index.ejs', {
         inputs: cards
     });
 })
 
-app.use('/get_card', async (req,res) => {
+app.use('/search', async (req,res) => {
 
 
 })
