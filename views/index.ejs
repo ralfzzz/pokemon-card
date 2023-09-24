@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -35,7 +37,7 @@
 
   <body>
     <section id="header">
-      <div class="container my-3">
+      <div class="container mb-3 mt-5">
         <div class="row justify-content-center">
           <div class="col-md-5">
             <h4 class="text-center">Pokemon TCG Card</h4>
@@ -49,9 +51,9 @@
       <div class="container mt-3">
         <div class="row justify-content-center">
           <div class="col-md-5">
-            <form action="/search" method="post">
+            <form action="/search" method="POST">
               <select
-                class="selectpicker shadow"
+                class="selectpicker shadow show-tick"
                 data-live-search="true"
                 data-max-options="5"
                 title="Search Pokemon Name..."
@@ -59,14 +61,18 @@
                 data-style="btn-outline-dark"
                 name="search"
               >
-                <% inputs.forEach(card => { let pokemonName = card.name; let
-                pokemonId = card.id %>
+                <% if (locals.inputs) { %> <% inputs.forEach(card => { %> <% let
+                pokemonName = card.name; %> <% let pokemonId = card.id %>
                 <option value="<%= pokemonId%>"><%= pokemonName %></option>
-                <% }); %>
+                <% }); %> <% } else { %>
+                <option disabled>Server side error getting cards!</option>
+                <%}%>
               </select>
-              <button type="submit" class="btn btn-outline-dark mt-3 btn-block">
-                Search
-              </button>
+              <input
+                type="submit"
+                value="Search"
+                class="btn btn-outline-dark btn-block mt-3"
+              />
             </form>
           </div>
         </div>
@@ -74,16 +80,24 @@
     </section>
 
     <section id="card">
-      <div class="container mt-3">
+      <div class="container mt-3 mb-5">
         <div class="row justify-content-center">
           <div class="col-md-5">
             <div class="card bg-light text-dark shadow">
               <div class="card-body">
+                <% if (locals.card) { %>
+                <img
+                  src="<%= card.image %>/high.png"
+                  alt="card"
+                  class="img-fluid"
+                />
+                <% } else { %>
                 <img
                   src="https://source.unsplash.com/600x825?color"
                   alt="card"
                   class="img-fluid"
                 />
+                <%}%>
               </div>
             </div>
           </div>
@@ -91,11 +105,16 @@
       </div>
     </section>
 
-    <section id="footer">
+    <section id="footer" class="fixed-bottom">
       <div class="container mt-3">
         <div class="row justify-content-center">
           <div class="col-md-5">
-            <p class="text-center">Made by Ralfzz</p>
+            <p class="text-center">
+              Made by
+              <a href="https://github.com/ralfzzz" class="badge badge-primary"
+                >Ralfzz</a
+              >
+            </p>
           </div>
         </div>
       </div>
