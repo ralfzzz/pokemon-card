@@ -1,5 +1,5 @@
 # pokemon-card
- website to get pokemon card
+ Website to find Pokemon TCG Card before you play the game or just having fun being nostalgic:)
 
 # INSTALL
  npm i -y
